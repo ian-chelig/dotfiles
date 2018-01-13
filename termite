@@ -1,0 +1,96 @@
+[colors]
+#cursor = #dcdccc
+#cursor_foreground = #dcdccc
+#foreground = ${xrdb:foreground}
+#foreground_bold = #ffffff
+#background = ${xrdb:background}
+
+
+# colors from color0 to color254 can be set
+#BLACK
+color0 = #3f3f3f
+color8 = #709080
+
+#RED
+color1 = #8c5d5d
+color9 = #dca3a3
+
+#GREEN
+color2 = #60b48a
+color10 = #c3bf9f
+
+#YELLOW
+color3 = #ffe4b5
+color11 = #f0dfaf
+
+#BLUE
+color4 = #637e99
+#506070
+color12 = #94bff3
+
+#MAGENTA
+color5 = #dc8cc3
+color13 = #ec93d3
+
+#CYAN
+color6 = #7ebbbf
+#8cd0d3
+color14 = #93e0e3
+
+#WHITE
+color7 = #dcdccc
+color15 = #ffffff
+
+
+# 20% background transparency (requires a compositor)
+#background = rgba(63, 63, 63, 0.8)
+
+# if unset, will reverse foreground and background
+# highlight = #2f2f2f
+
+[options]
+scroll_on_output = false
+scroll_on_keystroke = true
+audible_bell = false
+mouse_autohide = false
+allow_bold = true
+dynamic_title = true
+urgent_on_bell = true
+clickable_url = true
+font = xos4 Terminus 14px
+scrollback_lines = 10000
+search_wrap = true
+#icon_name = terminal
+#geometry = 640x480
+
+# "system", "on" or "off"
+cursor_blink = system
+
+# "block", "underline" or "ibeam"
+cursor_shape = ibeam
+
+# $BROWSER is used by default if set, with xdg-open as a fallback
+#browser = xdg-open
+
+# set size hints for the window
+#size_hints = false
+
+# Hide links that are no longer valid in url select overlay mode
+filter_unmatched_urls = true
+
+# emit escape sequences for extra modified keys
+#modify_other_keys = false
+
+[hints]
+#font = Monospace 12
+#font = xos4 Terminus 12px
+#foreground = #dcdccc
+#background = #3f3f3f
+#active_foreground = #e68080
+#active_background = #3f3f3f
+#padding = 2
+#border = #3f3f3f
+#border_width = 0.5
+#roundness = 2.0
+
+# vim: ft=dosini cms=#%s
