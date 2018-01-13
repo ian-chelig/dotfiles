@@ -40,7 +40,7 @@ bindkey -v
 _lineup=$'\e[1A'
 _linedown=$'\e[1B'
 CAN_I_RUN_SUDO=0
-LC_CTYPE="c"
+EDITOR="/bin/nvim"
 # End of lines configured by zsh-newuser-install
 #
 #
