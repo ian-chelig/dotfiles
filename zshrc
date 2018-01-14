@@ -34,7 +34,7 @@ compinit
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
-#setopt autocd
+setopt autocd
 #setopt HIST_IGNORE_DUPS  #history ignores duplicates
 bindkey -v
 _lineup=$'\e[1A'

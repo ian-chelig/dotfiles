@@ -10,6 +10,8 @@ Plugin 'taglist.vim'
 Plugin 'Yggdroot/indentLine'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'tpope/vim-vinegar'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
 runtime macros/matchit.vim "matchit for better use of % command
 
 "Filetype plugins
@@ -30,10 +32,11 @@ set statusline=
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+highlight SyntasticErrorLine ctermbg=red
 
 let g:syntastic_shell = "/usr/bin/zsh"
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
@@ -43,6 +46,8 @@ let g:syntastic_html_checkers = ['eslint']
 let g:syntastic_mode_map = {
             \"mode": "active",
             \"active_filetypes": ["javascript", "html"] }
+highlight SyntasticError ctermbg=red
+highlight SyntasticWarning ctermbg=black
 
 "*****Taglist****
 if &runtimepath =~ 'taglist.vim'
@@ -69,6 +74,8 @@ endif
 
 let g:indentLine_char = '|'
 let g:indentLine_color_term = 3
+
+let g:jsx_ext_required=0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Commands
@@ -191,6 +198,8 @@ set ignorecase "Ignore case
 set smartcase "Be smart about case
 set hlsearch "Highlight search
 set incsearch "Search as you type
+"make it look not shitty
+highlight Search ctermfg=black ctermbg=red
 "Visual mode * or # searches for current selection
 vnoremap <silent> * :call VisualSelection('f')<CR>
 vnoremap <silent> # :call VisualSelection('b')<CR>
@@ -313,6 +322,12 @@ map ]b :bnext<cr>
 map [B :bfirst<cr>
 map ]B :blast<cr>
 
+" [] for location list
+map [l :lprev<cr>
+map ]l :lnext<cr>
+map [L :lfirst<cr>
+map ]L :llast<cr>
+
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
@@ -370,7 +385,7 @@ fun! VexClose()
     let target_nr = ( cur_win_nr == 1 ? winnr("#"):cur_win_nr)
 
     1wincmd w
-    close
+    wincmd c
     unlet t:vex_buf_nr
     let g:netrw_browse_split=0
 
