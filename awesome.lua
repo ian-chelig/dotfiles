@@ -206,6 +206,8 @@ end
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
+
+-- console cmd widgets
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     set_wallpaper(s)
@@ -229,16 +231,13 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Create a tasklist widget
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist_buttons)
-    test1 = assert(io.popen("echo test", 'r'))
-
-    s.test = wibox.widget{
-        text = test1:read('*l'),
-        widget = wibox.widget.textbox
-    }
 
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "bottom", screen = s })
     s.mywibox2 = awful.wibar({ position = "top", screen = s })
+
+    s.cattest = awful.widget.watch('cat /home/ian/test', 10) --Working stdout widget!
+
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -248,7 +247,7 @@ awful.screen.connect_for_each_screen(function(s)
         },
         {
             layout = wibox.layout.fixed.horizontal,
-            s.test,
+            s.cattest,
         },
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
