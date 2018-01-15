@@ -211,7 +211,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
+    awful.tag({ "1", "2", "3", "4", "5"}, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -231,10 +231,24 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist_buttons)
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
+    s.mywibox = awful.wibar({ position = "bottom", screen = s })
+    s.mywibox2 = awful.wibar({ position = "top", screen = s })
 
     -- Add widgets to the wibox
     s.mywibox:setup {
+        layout = wibox.layout.align.horizontal,
+        { -- Left widgets
+            layout = wibox.layout.fixed.horizontal,
+        },
+        {
+            layout = wibox.layout.fixed.horizontal,
+        },
+        { -- Right widgets
+            layout = wibox.layout.fixed.horizontal,
+            mytextclock,
+        },
+    }
+    s.mywibox2:setup {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
@@ -242,12 +256,13 @@ awful.screen.connect_for_each_screen(function(s)
             s.mytaglist,
             s.mypromptbox,
         },
-        s.mytasklist, -- Middle widget
+        {
+            layout = wibox.layout.fixed.horizontal,
+            s.mytasklist, -- Middle widget
+        },
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
             wibox.widget.systray(),
-            mytextclock,
             s.mylayoutbox,
         },
     }
@@ -299,7 +314,7 @@ globalkeys = awful.util.table.join(
         function() 
             os.execute("rofi -combi-modi window,run -show combi -modi combi -location 1 -width 100 -lines 3 -line-margin 0 -line-padding 1 -separator-style none -font 'xos4 terminus 10' -columns 3 -bw 0 -disable-history -hide-scrollbar -color-window '#222222, #222222, #b1b4b3' -color-normal '#222222, #b1b4b3, #222222, #005577, #b1b4b3' -color-active '#222222, #b1b4b3, #222222, #007763, #b1b4b3' -color-urgent '#222222, #b1b4b3, #222222, #77003d, #b1b4b3' ")
         end),
-    awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
+    awful.key({ modkey,           }, "F1",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
               {description = "view previous", group = "tag"}),
@@ -307,7 +322,7 @@ globalkeys = awful.util.table.join(
               {description = "view next", group = "tag"}),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
               {description = "go back", group = "tag"}),
-    awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
+    awful.key({ modkey,           }, "e", function () mymainmenu:show() end,
               {description = "show main menu", group = "awesome"}),
 
     --Cycle FOcus
@@ -360,13 +375,13 @@ globalkeys = awful.util.table.join(
               {description = "focus by direction right", group = "client"}),
 
     --column controls
-    awful.key({ modkey,           }, "=",     function () awful.tag.incnmaster( 1, nil, true) end,
+    awful.key({ modkey,           }, "d",     function () awful.tag.incnmaster( 1, nil, true) end,
               {description = "increase the number of master clients", group = "layout"}),
-    awful.key({ modkey,           }, "-",     function () awful.tag.incnmaster(-1, nil, true) end,
+    awful.key({ modkey,           }, "a",     function () awful.tag.incnmaster(-1, nil, true) end,
               {description = "decrease the number of master clients", group = "layout"}),
-    awful.key({ modkey,           }, ".",     function () awful.tag.incncol( 1, nil, true)    end,
+    awful.key({ modkey,           }, "w",     function () awful.tag.incncol( 1, nil, true)    end,
               {description = "increase the number of columns", group = "layout"}),
-    awful.key({ modkey,           }, ",",     function () awful.tag.incncol(-1, nil, true)    end,
+    awful.key({ modkey,           }, "s",     function () awful.tag.incncol(-1, nil, true)    end,
               {description = "decrease the number of columns", group = "layout"}),
 
     -- Layout manipulation
