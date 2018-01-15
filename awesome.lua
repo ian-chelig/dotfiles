@@ -229,6 +229,12 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Create a tasklist widget
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist_buttons)
+    test1 = assert(io.popen("echo test", 'r'))
+
+    s.test = wibox.widget{
+        text = test1:read('*l'),
+        widget = wibox.widget.textbox
+    }
 
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "bottom", screen = s })
@@ -242,6 +248,7 @@ awful.screen.connect_for_each_screen(function(s)
         },
         {
             layout = wibox.layout.fixed.horizontal,
+            s.test,
         },
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
