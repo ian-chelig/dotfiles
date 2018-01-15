@@ -8,11 +8,12 @@
 
 # colors from color0 to color254 can be set
 #BLACK
-color0 = #3f3f3f
+color0 = #2a2a2a
+#3f3f3f
 color8 = #709080
 
 #RED
-color1 = #8c5d5d
+color1 = #a86b6b
 color9 = #dca3a3
 
 #GREEN
@@ -43,7 +44,7 @@ color15 = #ffffff
 
 
 # 20% background transparency (requires a compositor)
-#background = rgba(63, 63, 63, 0.8)
+background = rgba(42, 42, 42, 0.95)
 
 # if unset, will reverse foreground and background
 # highlight = #2f2f2f

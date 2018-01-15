@@ -360,13 +360,13 @@ globalkeys = awful.util.table.join(
               {description = "focus by direction right", group = "client"}),
 
     --column controls
-    awful.key({ modkey,           }, "w",     function () awful.tag.incnmaster( 1, nil, true) end,
+    awful.key({ modkey,           }, "=",     function () awful.tag.incnmaster( 1, nil, true) end,
               {description = "increase the number of master clients", group = "layout"}),
-    awful.key({ modkey,           }, "s",     function () awful.tag.incnmaster(-1, nil, true) end,
+    awful.key({ modkey,           }, "-",     function () awful.tag.incnmaster(-1, nil, true) end,
               {description = "decrease the number of master clients", group = "layout"}),
-    awful.key({ modkey,           }, "d",     function () awful.tag.incncol( 1, nil, true)    end,
+    awful.key({ modkey,           }, ".",     function () awful.tag.incncol( 1, nil, true)    end,
               {description = "increase the number of columns", group = "layout"}),
-    awful.key({ modkey,           }, "a",     function () awful.tag.incncol(-1, nil, true)    end,
+    awful.key({ modkey,           }, ",",     function () awful.tag.incncol(-1, nil, true)    end,
               {description = "decrease the number of columns", group = "layout"}),
 
     -- Layout manipulation
