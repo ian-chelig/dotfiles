@@ -213,7 +213,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5"}, s, awful.layout.layouts[1])
+    awful.tag({ "\u{262d}", "\u{269b}", "\u{2695}", "\u{26a0}", "\u{270e}"}, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -235,25 +235,67 @@ awful.screen.connect_for_each_screen(function(s)
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "bottom", screen = s })
     s.mywibox2 = awful.wibar({ position = "top", screen = s })
+    cpuWidget = awful.widget.watch({"bash", "-c", "echo CPU: $[100-$(vmstat 1 2|tail -1|awk '{print $15}')]%"}, 3)
+    memWidget = awful.widget.watch({"bash", "-c", "free -m | grep Mem"}, 3, function(widget, stdout)
+        local i = 0
+        for n in string.gmatch(stdout, "%d+") do
+            i=i+1
+            if i == 1 then
+                mt = n
+            elseif i == 2 then
+                mf = n
+            end
+        end
 
-    s.cattest = awful.widget.watch('cat /home/ian/test', 10) --Working stdout widget!
+        mp = tonumber(string.format("%.1f", mf*100/mt))
+        fmt = tonumber(string.format("%.1f", mt/1024))
+        fmf = tonumber(string.format("%.1f", mf/1024))
+        
+        widget:set_text("Mem:" .. fmf .. "/" .. fmt .. "G | ")
+        --(" .. mp .. "%)
+    end)
 
-
-    -- Add widgets to the wibox
-    s.mywibox:setup {
-        layout = wibox.layout.align.horizontal,
-        { -- Left widgets
-            layout = wibox.layout.fixed.horizontal,
-        },
-        {
-            layout = wibox.layout.fixed.horizontal,
-            s.cattest,
-        },
-        { -- Right widgets
-            layout = wibox.layout.fixed.horizontal,
-            mytextclock,
-        },
+    netWidget = lain.widgets.net{
+        timeout="3",
+        iface="eno1",
+        units="1024", --raise to the power of 2 for mb, 3 for gb etc
+        settings = function()
+            widget:set_markup("\u{25b2} " .. net_now.sent .. " \u{25bc} " .. net_now.received)
+        end
     }
+
+    weatherWidget = lain.widgets.weather{
+        timeout=120,
+        timeout_forecast=10800,
+        units="imperial",
+        cnt=5,
+        city_id=5263045,
+        default_current_call = "curl -s 'http://api.openweathermap.org/data/2.5/weather?id=%s&units=%s&lang=%s&APPID=e57f5019651b64bcc69813501645682e'",
+        settings = function()
+            descr = weather_now["weather"][1]["description"]:lower()
+            units = math.floor(weather_now["main"]["temp"])
+            widget:set_markup(" | " .. descr .. " " .. units .. "\u{00B0}f")
+        end
+    }
+
+    local leftWibox = wibox.layout.fixed.horizontal()
+    leftWibox:add(netWidget)
+    
+    local midWibox = wibox.layout.fixed.horizontal()
+    midWibox:add(mytextclock)
+    midWibox:add(weatherWidget)
+
+    local rightWibox = wibox.layout.fixed.horizontal()
+    rightWibox:add(memWidget)
+    rightWibox:add(cpuWidget)
+
+    local alignWibox = wibox.layout.align.horizontal()
+    alignWibox:set_expand('none')
+    alignWibox.first = leftWibox
+    alignWibox.second = midWibox
+    alignWibox.third = rightWibox
+    s.mywibox:set_widget(alignWibox)
+
     s.mywibox2:setup {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
@@ -262,10 +304,7 @@ awful.screen.connect_for_each_screen(function(s)
             s.mytaglist,
             s.mypromptbox,
         },
-        {
-            layout = wibox.layout.fixed.horizontal,
-            s.mytasklist, -- Middle widget
-        },
+        s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
