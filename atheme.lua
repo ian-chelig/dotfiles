@@ -21,7 +21,7 @@ theme.border_marked = "#91231c"
 
 theme.font          = "xos4 Terminus 14px"
 theme.border_width  = 3
-theme.useless_gap_width = 10
+theme.useless_gap = 10
 
 -- There are other variable sets
 -- overriding the default one when
@@ -82,13 +82,13 @@ theme.layout_floating  = "/usr/share/awesome/themes/default/layouts/floatingw.pn
 theme.layout_magnifier = "/usr/share/awesome/themes/default/layouts/magnifierw.png"
 theme.layout_max = "/usr/share/awesome/themes/default/layouts/maxw.png"
 theme.layout_fullscreen = "/usr/share/awesome/themes/default/layouts/fullscreenw.png"
-theme.layout_uselesstilebottom = "/usr/share/awesome/themes/default/layouts/tilebottomw.png"
-theme.layout_uselesstileleft   = "/usr/share/awesome/themes/default/layouts/tileleftw.png"
-theme.layout_uselesstile = "/usr/share/awesome/themes/default/layouts/tilew.png"
-theme.layout_uselesstiletop = "/usr/share/awesome/themes/default/layouts/tiletopw.png"
+theme.layout_tilebottom = "/usr/share/awesome/themes/default/layouts/tilebottomw.png"
+theme.layout_tileleft   = "/usr/share/awesome/themes/default/layouts/tileleftw.png"
+theme.layout_tile = "/usr/share/awesome/themes/default/layouts/tilew.png"
+theme.layout_tiletop = "/usr/share/awesome/themes/default/layouts/tiletopw.png"
 theme.layout_spiral  = "/usr/share/awesome/themes/default/layouts/spiralw.png"
 theme.layout_dwindle = "/usr/share/awesome/themes/default/layouts/dwindlew.png"
-theme.layout_centerworkd = "/home/ian/.config/awesome/lain/icons/layout/default/centerworkw.png"
+theme.layout_centerwork = "/home/ian/.config/awesome/lain/icons/layout/default/centerworkw.png"
 theme.layout_centerfair = "/home/ian/.config/awesome/lain/icons/layout/default/centerfairw.png"
 theme.layout_termfair = "/home/ian/.config/awesome/lain/icons/layout/default/termfairw.png"
 

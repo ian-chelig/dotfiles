@@ -21,6 +21,8 @@ source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions-master/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#email widget variable
+source /home/ian/scripts/emailenv.sh
 
 zstyle ':completion:*' completer _complete _ignored 
 zstyle :compinstall filename '/home/ian/.zshrc'

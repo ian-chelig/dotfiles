@@ -57,16 +57,13 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     awful.layout.suit.floating,
-    lain.layout.uselesstile,                                                                                  
-    lain.layout.uselesstile.bottom,
-    lain.layout.uselesstile.top,
-    lain.layout.termfair,
-    lain.layout.centerworkd,
-    lain.layout.centerfair,
     awful.layout.suit.tile,
-    --awful.layout.suit.tile.left,
-    --awful.layout.suit.tile.bottom,
-    --awful.layout.suit.tile.top,
+    awful.layout.suit.tile.left,
+    awful.layout.suit.tile.bottom,
+    awful.layout.suit.tile.top,
+    lain.layout.termfair,
+    lain.layout.centerwork,
+    --lain.layout.centerfair,
     --awful.layout.suit.fair,
     --awful.layout.suit.fair.horizontal,
     --awful.layout.suit.spiral,
@@ -227,7 +224,6 @@ awful.screen.connect_for_each_screen(function(s)
                            awful.button({ }, 5, function () awful.layout.inc(-1) end)))
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, taglist_buttons)
-    
 
     -- Create a tasklist widget
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist_buttons)
@@ -251,21 +247,21 @@ awful.screen.connect_for_each_screen(function(s)
         fmt = tonumber(string.format("%.1f", mt/1024))
         fmf = tonumber(string.format("%.1f", mf/1024))
         
-        widget:set_text("Mem:" .. fmf .. "/" .. fmt .. "G | ")
+        widget:set_text("Mem: " .. fmf .. "/" .. fmt .. "G | ")
         --(" .. mp .. "%)
     end)
 
-    netWidget = lain.widgets.net{
-        timeout="3",
+    netWidget = lain.widget.net{
+        timeout=3,
         iface="eno1",
-        units="1024", --raise to the power of 2 for mb, 3 for gb etc
+        units=1024, --raise to the power of 2 for mb, 3 for gb etc
         settings = function()
-            widget:set_markup("\u{25b2} " .. net_now.sent .. " \u{25bc} " .. net_now.received)
+            widget:set_text("\u{25b2} " .. net_now.sent .. " \u{25bc} " .. net_now.received .. " KB/s")
         end
     }
 
-    weatherWidget = lain.widgets.weather{
-        timeout=120,
+    weatherWidget = lain.widget.weather{
+        timeout=600,
         timeout_forecast=10800,
         units="imperial",
         cnt=5,
@@ -278,14 +274,95 @@ awful.screen.connect_for_each_screen(function(s)
         end
     }
 
-    local leftWibox = wibox.layout.fixed.horizontal()
-    leftWibox:add(netWidget)
+    local pulseWidget = lain.widget.pulsebar{
+        timeout=7,
+        colors = {
+            background = "#000000",
+            mute = "#EB8F8F",
+            unmute = "#A4CE8A"
+        }
+    }
+
+    pulseWidget.bar:buttons(awful.util.table.join(
+        awful.button({}, 1, function() -- left click
+            awful.spawn("termite -e pulsemixer")
+        end),
+        awful.button({}, 2, function() -- middle click
+            os.execute(string.format("pactl set-sink-volume %d 100%%", pulseWidget.device))
+            pulseWidget.update()
+        end),
+        awful.button({}, 3, function() -- right click
+            os.execute(string.format("pactl set-sink-mute %d toggle", pulseWidget.device))
+            pulseWidget.update()
+        end),
+        awful.button({}, 4, function() -- scroll up
+            os.execute("pactl set-sink-volume " .. pulseWidget.device .. " +1%")
+            pulseWidget.update()
+        end),
+        awful.button({}, 5, function() -- scroll down
+            os.execute("pactl set-sink-volume " .. pulseWidget.device .. " -1%")
+            pulseWidget.update()
+        end)
+    ))
+
+    local batWidget = lain.widget.bat{
+        battery = "BAT0",
+        ac = "AC",
+        settings = function()
+            cs = ""
+            perc = bat_now.perc .. "%"
+            if bat_now.status == "Discharging" then
+                cs = "-"
+            elseif bat_now.status == "Charging" then
+                cs = "+"
+            elseif bat_now.status == "Full" then
+                cs = "="
+            elseif bat_now.status == "N/A" then
+                cs = ""
+                perc = ""
+            end
+            widget:set_text(cs .. perc)
+        end 
+    }
+
+    mailWidget = lain.widget.imap({
+        server="imap.gmail.com",
+        mail=os.getenv("EMAIL_ACC"),
+        password=os.getenv("EMAIL_PASS"),
+        timeout=300,
+        settings = function()
+            widget:set_text("\u{2709} " .. mailcount .. " | ")
+        end
+    })
+    mailWidget.update()
+    
+    s.colWidget = wibox.widget{
+        widget = wibox.widget.textbox
+    }
+
+    s.masWidget = wibox.widget{
+        widget = wibox.widget.textbox
+    }
+
+    tag.connect_signal("property::master_count", function(t)
+        t.screen.masWidget.text = "M: " .. t.master_count
+    end)
+
+    tag.connect_signal("property::column_count", function(t)
+        t.screen.colWidget.text = " | C: " .. t.column_count .. " | "
+    end)
+
+    local leftWibox = wibox.layout.flex.horizontal()
+    leftWibox:add(netWidget.widget)
     
     local midWibox = wibox.layout.fixed.horizontal()
+    midWibox:add(mailWidget.widget)
     midWibox:add(mytextclock)
-    midWibox:add(weatherWidget)
+    midWibox:add(weatherWidget.widget)
 
     local rightWibox = wibox.layout.fixed.horizontal()
+    rightWibox:add(s.masWidget)
+    rightWibox:add(s.colWidget)
     rightWibox:add(memWidget)
     rightWibox:add(cpuWidget)
 
@@ -307,6 +384,8 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+            batWidget.widget,
+            pulseWidget.bar,
             wibox.widget.systray(),
             s.mylayoutbox,
         },
@@ -643,6 +722,7 @@ client.connect_signal("manage", function (c)
         awful.placement.no_offscreen(c)
     end
 end)
+
 
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
 client.connect_signal("request::titlebars", function(c)
