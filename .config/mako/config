@@ -1,0 +1,14 @@
+sort=-time
+layer=top
+background-color=#311016
+width=300
+height=150
+border-size=3
+border-color=#ffb5bd
+border-radius=4
+padding=20
+icons=1
+max-icon-size=64
+default-timeout=5000
+ignore-timeout=1
+font=Mononoki nerd font 12

@@ -1,0 +1,44 @@
+[colors]
+transparent_background_colors = true
+
+[colors.cursor]
+cursor = "#1EA8FC"
+text = "#090819"
+
+[colors.line_indicator]
+background = "#090819"
+foreground = "#F2F3F7"
+
+[colors.normal]
+black = "#0C0A20"
+blue = "#1EA8FC"
+cyan = "#42C6FF"
+green = "#A7DA1E"
+magenta = "#DF86FF"
+red = "#E61F44"
+white = "#F2F3F7"
+yellow = "#FFD400"
+
+[colors.primary]
+background = "#0C0A20"
+foreground = "#F2F3F7"
+
+[colors.search.focused_match]
+background = "#1EA8FC"
+foreground = "CellForeground"
+
+[colors.search.matches]
+background = "CellBackground"
+foreground = "CellForeground"
+
+[colors.selection]
+background = "#1F1147"
+text = "CellForeground"
+
+[colors.vi_mode_cursor]
+cursor = "#FFD400"
+text = "#090819"
+
+[font.normal]
+family = "Mononoki Nerd Font"
+style = "Regular"

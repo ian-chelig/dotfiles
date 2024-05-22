@@ -1,0 +1,2 @@
+export MOZ_X11_EGL=1 
+export MOZ_DISABLE_RDD_SANDBOX=1
