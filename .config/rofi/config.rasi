@@ -1,0 +1,5 @@
+//@theme "/home/daisy/.config/rofi/themes/rofi.rasi"
+//@theme "/nix/store/s3hk3d5s4pmbnqqi018zys8k3nyjy7hr-rofi-1.7.3/share/rofi/themes/Arc-Dark.rasi"
+//@theme "/home/daisy/.config/rofi/themes/rofi.rasi"
+@import "/home/daisy/.cache/wal/colors-rofi-dark.rasi"
+@theme "wpg"
