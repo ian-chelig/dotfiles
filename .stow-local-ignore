@@ -1,0 +1,11 @@
+\.git
+\.gitignore
+\.gitmodules
+userChrome
+
+^/README.*
+^/readme.*
+^/LICENSE.*
+^/COPYING
+
+^/userChrome*
