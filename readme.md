@@ -1,7 +1,7 @@
 # Dotfiles
 
 ## This stuff needs to be configured
-- [ ] fix userchrome
+- [x] fix userchrome
 - [ ] waybar
 - [x] hyprland
 - [ ] display manager
