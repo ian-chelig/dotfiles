@@ -13,6 +13,7 @@ path=(~/.local/bin $path)
 export PATH
 # End of lines added by compinstall
 # Lines configured by zsh-newuser-install
+export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
@@ -49,9 +50,11 @@ source $HOME/.config/zsh/plugins/fzf-zsh-completions/fzf-zsh-completions.plugin.
 #alias neovim="~/scripts/openfile"
 #alias lvim="~/scripts/openfile"
 alias sudo='nocorrect sudo '
+alias nvim='~/scripts/nvropen'
 
 (cat -pp ~/.cache/wal/sequences &)
-trap '$HOME/scripts/zellijreload $$' SIGUSR1
+trap 'echo $(zellij ls | grep current | awk "{print $1}")' SIGUSR2
+#trap '$HOME/scripts/zellijreload $$' SIGUSR1
 source ~/.cache/wal/colors.sh
 source ~/.cache/wal/colors-tty.sh 
 #xrdb $HOME/.cache/wal/colors.Xresources

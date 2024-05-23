@@ -6,6 +6,7 @@
 - [ ] sig traps and fifos
 - [ ] Rice thunar the budlabs way
 - [ ] Find a way to reload gtk icon pack in thunar?
+- [ ] Find a way to follow links
 - [ ] fix userchrome
 - [ ] waybar
 - [ ] wofi
