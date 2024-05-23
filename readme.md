@@ -1,17 +1,16 @@
 # Dotfiles
 
-## Todo List
-
-- [ ] Find a way to reload all zellij instances on theme change
-- [ ] sig traps and fifos
-- [ ] Rice thunar the budlabs way
-- [ ] Find a way to reload gtk icon pack in thunar?
-- [ ] Find a way to follow links
+## This stuff needs to be configured
 - [ ] fix userchrome
 - [ ] waybar
-- [ ] wofi
-- [ ] hyprland
-- [ ] swww for wallpaper
-- [ ] homepage for firefox with colors
+- [x] hyprland
 - [ ] display manager
+
+## This stuff seems hard
+- [ ] Rice thunar the budlabs way
+- [ ] Find a way to reload gtk icon pack in thunar?
+
+## This stuff seems never ending
+- [ ] homepage for firefox with colors
+- [ ] pywal stylish css
 - [ ] endless ags fuckery

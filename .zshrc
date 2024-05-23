@@ -51,10 +51,10 @@ source $HOME/.config/zsh/plugins/fzf-zsh-completions/fzf-zsh-completions.plugin.
 #alias lvim="~/scripts/openfile"
 alias sudo='nocorrect sudo '
 alias nvim='~/scripts/nvropen'
+alias zellij='zellij attach -c $$'
 
 (cat -pp ~/.cache/wal/sequences &)
-trap 'echo $(zellij ls | grep current | awk "{print $1}")' SIGUSR2
-#trap '$HOME/scripts/zellijreload $$' SIGUSR1
+trap 'zellij' USR1
 source ~/.cache/wal/colors.sh
 source ~/.cache/wal/colors-tty.sh 
 #xrdb $HOME/.cache/wal/colors.Xresources
