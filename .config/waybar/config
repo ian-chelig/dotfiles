@@ -48,7 +48,7 @@
     },
     "custom/power": {
       "format": "󰤆",
-      "on-click": "/nix/store/v8j7vhr6qn807xmgljs3ra1d3div0xc1-wlogout-1.2.2/bin/wlogout -p layer-shell",
+      "on-click": "wlogout -p layer-shell -C ~/.cache/wal/wlogout",
       "tooltip": false
     },
     "height": 34,

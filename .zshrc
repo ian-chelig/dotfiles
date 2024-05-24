@@ -52,6 +52,7 @@ source $HOME/.config/zsh/plugins/fzf-zsh-completions/fzf-zsh-completions.plugin.
 alias sudo='nocorrect sudo '
 alias nvim='~/scripts/nvropen'
 alias zellij='zellij attach -c $$'
+alias timeshift-gtk='sudo -E timeshift-gtk'
 
 (cat -pp ~/.cache/wal/sequences &)
 trap 'zellij' USR1
