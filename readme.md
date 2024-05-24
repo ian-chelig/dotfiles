@@ -1,16 +1,14 @@
 # Dotfiles
 
-## This stuff needs to be configured
-- [x] fix userchrome
-- [ ] waybar
-- [x] hyprland
-- [ ] display manager
+## Easy stuff
+- [ ] Handle video and audio files appropriately
 
 ## This stuff seems hard
-- [ ] Rice thunar the budlabs way
 - [ ] Find a way to reload gtk icon pack in thunar?
+- [ ] Find a way to either add a vim hotkey to follow links or goto workspace 2
 
 ## This stuff seems never ending
-- [ ] homepage for firefox with colors
-- [ ] pywal stylish css
-- [ ] endless ags fuckery
+- [ ] Find config snippets we like.
+- [ ] Homepage for firefox with colors
+- [ ] Pywal stylish css
+- [ ] Endless ags fuckery
