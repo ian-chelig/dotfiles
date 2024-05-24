@@ -53,6 +53,7 @@ alias sudo='nocorrect sudo '
 alias nvim='~/scripts/nvropen'
 alias zellij='zellij attach -c $$'
 alias timeshift-gtk='sudo -E timeshift-gtk'
+alias feh='~/scripts/fehopen'
 
 (cat -pp ~/.cache/wal/sequences &)
 trap 'zellij' USR1

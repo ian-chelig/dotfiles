@@ -1,7 +1,7 @@
 # Dotfiles
 
 ## Easy stuff
-- [ ] Handle video and audio files appropriately
+- [ ] Handle video files with a desktop file
 
 ## This stuff seems hard
 - [ ] Find a way to reload gtk icon pack in thunar?
