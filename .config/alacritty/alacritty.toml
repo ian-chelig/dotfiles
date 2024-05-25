@@ -39,6 +39,9 @@ text = "CellForeground"
 cursor = "#FFD400"
 text = "#090819"
 
+[font]
+size = 12
+
 [font.normal]
 family = "Mononoki Nerd Font"
 style = "Regular"
