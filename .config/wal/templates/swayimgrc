@@ -71,7 +71,7 @@ shadow = {color0}
 ################################################################################
 [info]
 # Mode on startup (off/brief/full)
-mode = full
+mode = off
 # Display scheme for the "full" mode: position = content
 full.topleft = name,format,filesize,imagesize,exif
 full.topright = index

@@ -2,7 +2,6 @@
 
 ## Easy stuff
 - [ ] Handle video files with a desktop file
-- [ ] swayimg open desktop file:
 
 ## This stuff seems hard
 - [ ] Find a way to reload gtk icon pack in thunar?
