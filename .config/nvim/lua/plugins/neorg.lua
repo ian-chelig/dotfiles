@@ -45,4 +45,5 @@ return {
       vim.wo.conceallevel = 2
     end,
   },
+  { "glacambre/firenvim", build = ":call firenvim#install(0)" },
 }
